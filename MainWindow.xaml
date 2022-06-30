@@ -1,0 +1,19 @@
+﻿<Window x:Class="TWKVideoTools.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:views="clr-namespace:TWKVideoTools.Views"
+        xmlns:vms="clr-namespace:TWKVideoTools.ViewModels"
+        Title="TWK Video Utilities" Height="800" Width="800">
+
+    <TabControl>
+        <TabItem Header="Srt To Speech">
+            <views:SrtToTtsToFCPXMLView DataContext="{Binding SrtToTtsToFCPXMLViewModel}" />
+        </TabItem>
+        <TabItem Header="Edl To Youtube">
+            <views:EdlToYoutubeChapterView DataContext="{Binding EdlToYoutubeChapterViewModel}" />
+        </TabItem>
+    </TabControl>
+</Window>

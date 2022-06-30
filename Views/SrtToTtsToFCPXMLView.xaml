@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="TWKVideoTools.Views.SrtToTtsToFCPXMLView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:TWKVideoTools.Converters"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:IntToTimeConverter x:Key="IntToTimeConverter" />
+        <local:LinesToStringConverter x:Key="LinesToStringConverter" />
+    </UserControl.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="109" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="75" />
+        </Grid.ColumnDefinitions>
+
+        <!-- imported subtitle preview -->
+        <ListBox Grid.Row="0" Grid.ColumnSpan="3" x:Name="lbSubtitles" ItemsSource="{Binding SubtitleItems}" Margin="5">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Path=StartTime, Converter={StaticResource IntToTimeConverter}}" />
+                        <TextBlock Text="{Binding PlaintextLines, Converter={StaticResource LinesToStringConverter}}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- select srt file -->
+        <Label  Grid.Row="1" Content="SRT file" />
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="5,5,5,5" Text="{Binding SrtFilePath}" />
+        <Button x:Name="btnSrtBrowse" Content="Browse" Grid.Row="1" Grid.Column="2" Margin="5,5,5,5" Command="{Binding LoadSrtCommand}" />
+
+        <!-- output directory -->
+        <Label Grid.Row="2" Content="Output" />
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="5,5,5,5" Text="{Binding OutputPath}" />
+        <Button x:Name="btnSelectOutputFolder" Click="btnSelectOutputFolder_Click" Content="Browse" Grid.Row="2" Grid.Column="2" Margin="5,5,5,5" />
+
+        <!-- output details -->
+        <Label Grid.Row="3" Content="File Prefix" />
+        <TextBox Grid.Row="3" Text="{Binding Prefix}" Grid.Column="1" Margin="5,5,5,5" />
+
+        <!-- config file, this should be remembered -->
+        <Label Grid.Row="5" Content="GCloud Config File" />
+        <TextBox Grid.Row="5" Grid.Column="1" Margin="5,5,5,5" Text="{Binding KeyPath}" />
+        <Button x:Name="btnGCloudConfig" Click="btnGCloudConfig_Click" Content="Browse" Grid.Row="5" Grid.Column="2" Margin="5,5,5,5" />
+
+        <!-- go -->
+        <Button x:Name="btnGo" Content="Save" FontWeight="Bold" Grid.Row="6" Grid.Column="2" Click="btnGo_Click" Margin="5,5,5,5" />
+    </Grid>
+</UserControl>
