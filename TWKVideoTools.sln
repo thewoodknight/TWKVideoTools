@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TWKVideoTools", "TWKVideoTools.csproj", "{18263E16-B39B-46B6-82CE-663FC45C1C41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TWKVideoTools", "Source\TWKVideoTools.csproj", "{18263E16-B39B-46B6-82CE-663FC45C1C41}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Meta", "Meta", "{AE987FCE-D7C9-4F87-BA7D-76D31603F976}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
