@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TWKVideoTools.Models;
 
 namespace TWKVideoTools.ViewModels
@@ -25,11 +27,19 @@ namespace TWKVideoTools.ViewModels
         public bool Dummy { get; set; }
         public bool PadHours { get; set; }
 
+        public ICommand ConvertCommand { get; set; }
+        public ICommand LoadEDLCommand { get; set; }
+        public ICommand CheckedCommand { get; set; }
+
         public EdlToYoutubeChapterViewModel()
         {
             Markers = new List<Marker>();
             Colours = new List<MarkerColour>();
+            ConvertCommand = new RelayCommand(ConvertClick);
+            LoadEDLCommand = new AsyncRelayCommand(LoadEdl);
+            CheckedCommand = new RelayCommand(OutputText);
         }
+
 
         public void OutputText()
         {

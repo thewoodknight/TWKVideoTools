@@ -35,7 +35,8 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <CheckBox IsChecked="{Binding Checked}"  Checked="CheckBox_Checked"  Unchecked="CheckBox_Checked" Content="{Binding Label}" />
+                            <CheckBox IsChecked="{Binding Checked}" Command="{Binding Path=DataContext.CheckedCommand, RelativeSource={RelativeSource FindAncestor, 
+    AncestorType={x:Type local:EdlToYoutubeChapterView}}}" Content="{Binding Label}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -45,8 +46,8 @@
         <StackPanel Grid.Row="3">
             <CheckBox Margin="5" IsChecked="{Binding PadHours}">Pad Hours</CheckBox>
             <CheckBox Margin="5" IsChecked="{Binding Dummy}">Add Dummy ("00:00 Intro")</CheckBox>
-            <Button Margin="5" Padding="10" Click="LoadEdlClicked">Load EDL</Button>
-            <Button Margin="5" Padding="10" Click="Button_Click">Convert</Button>
+            <Button Margin="5" Padding="10" Command="{Binding LoadEDLCommand}">Load EDL</Button>
+            <Button Margin="5" Padding="10" Command="{Binding ConvertCommand}">Convert</Button>
         </StackPanel>
     </Grid>
 </UserControl>
