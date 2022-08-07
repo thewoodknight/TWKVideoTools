@@ -15,5 +15,12 @@
         <TabItem Header="Edl To Youtube">
             <views:EdlToYoutubeChapterView DataContext="{Binding EdlToYoutubeChapterViewModel}" />
         </TabItem>
+        <TabItem Header="Member CSV to TXT">
+            <views:MemberCSVtoTextView DataContext="{Binding MemberCSVtoTextViewModel}" />
+        </TabItem>
+        <TabItem Header="SRT to TXT">
+            <views:SrtToTxtView DataContext="{Binding SrtToTxtViewModel}" />
+        </TabItem>
+        
     </TabControl>
 </Window>

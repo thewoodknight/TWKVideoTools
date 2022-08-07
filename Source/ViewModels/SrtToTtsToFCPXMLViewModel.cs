@@ -24,6 +24,10 @@ namespace TWKVideoTools.ViewModels
         public ObservableCollection<SubtitlesParser.Classes.SubtitleItem> SubtitleItems { get; set; }
 
         public ICommand LoadSrtCommand { get; set; }
+        public ICommand BrowseForOutputDirectoryCommand { get; set; }
+        public ICommand BrowseForGCloudConfigCommand { get; set; }
+
+        public ICommand ConvertTextToSpeechCommand { get; set; }
 
         public SrtToTtsToFCPXMLViewModel()
         {
@@ -33,10 +37,22 @@ namespace TWKVideoTools.ViewModels
             Prefix = Settings.Prefix.Current.Value;
 
             LoadSrtCommand = new RelayCommand(() => { SelectSrt(); });
+            BrowseForOutputDirectoryCommand = new RelayCommand(BrowseForOutputDirectory);
+            BrowseForGCloudConfigCommand = new RelayCommand(BrowseForGCloudConfig);
+            ConvertTextToSpeechCommand = new AsyncRelayCommand(() => ConvertSrtToTts(), CanExecuteConversion);
         }
 
-        internal void btnSelectConfigFileClicked()
+        private bool CanExecuteConversion()
         {
+            if (string.IsNullOrEmpty(SrtFilePath) || string.IsNullOrEmpty(OutputPath) || string.IsNullOrEmpty(KeyPath))
+                return false;
+
+            return true;
+        }
+
+        private void BrowseForGCloudConfig()
+        {
+            
             OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "Config|*.json" };
             if (openFileDialog.ShowDialog() == true)
             {
@@ -44,9 +60,11 @@ namespace TWKVideoTools.ViewModels
                 Settings.KeyPath.Current.Value = KeyPath;
                 Common.Settings.SettingsUtility.Save();
             }
+
+            ((AsyncRelayCommand)ConvertTextToSpeechCommand).NotifyCanExecuteChanged();
         }
 
-        internal void btnSelectOutputFolderClicked()
+        private void BrowseForOutputDirectory()
         {
             var dialog = new CommonOpenFileDialog();
             dialog.IsFolderPicker = true;
@@ -56,9 +74,11 @@ namespace TWKVideoTools.ViewModels
                 Settings.OutputPath.Current.Value = OutputPath;
                 Common.Settings.SettingsUtility.Save();
             }
+
+            ((AsyncRelayCommand)ConvertTextToSpeechCommand).NotifyCanExecuteChanged();
         }
 
-        public async Task Voicify(bool skip = false)
+        public async Task ConvertSrtToTts(bool skip = false)
         {
             Settings.Prefix.Current.Value = Prefix;
             Common.Settings.SettingsUtility.Save();
@@ -104,7 +124,7 @@ namespace TWKVideoTools.ViewModels
 
         public void SelectSrt()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "SubRip Subtitle|*.srt" };
             if (openFileDialog.ShowDialog() == true)
             {
                 SrtFilePath = openFileDialog.FileName;
@@ -119,10 +139,14 @@ namespace TWKVideoTools.ViewModels
                     SubtitleItems.Add(i);
                 }
             }
+
+            ((AsyncRelayCommand)ConvertTextToSpeechCommand).NotifyCanExecuteChanged();
         }
 
         private void WriteFCPXML(string prefix)
         {
+            string name = "name_goes_here";
+
             XmlWriter xWrite;
             XmlWriterSettings xwSettings = new XmlWriterSettings();
             xwSettings.CheckCharacters = true;
@@ -181,7 +205,7 @@ namespace TWKVideoTools.ViewModels
                             new XAttribute("start", "0/1s")    //'12345/25s'
                         ));
                 }
-                string name = "name_goes_here";
+
                 XDocument doc = new XDocument(
                     new XDocumentType("fcpxml", null, null, null),
                     new XElement("fcpxml", new XAttribute("version", "1.9"),

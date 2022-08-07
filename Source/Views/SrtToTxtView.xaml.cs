@@ -2,9 +2,9 @@
 
 namespace TWKVideoTools.Views
 {
-    public partial class SrtToTtsToFCPXMLView : UserControl
+    public partial class SrtToTxtView : UserControl
     {
-        public SrtToTtsToFCPXMLView()
+        public SrtToTxtView()
         {
             InitializeComponent();
         }

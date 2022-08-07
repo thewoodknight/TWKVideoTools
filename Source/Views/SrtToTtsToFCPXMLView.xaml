@@ -46,7 +46,7 @@
         <!-- output directory -->
         <Label Grid.Row="2" Content="Output" />
         <TextBox Grid.Row="2" Grid.Column="1" Margin="5,5,5,5" Text="{Binding OutputPath}" />
-        <Button x:Name="btnSelectOutputFolder" Click="btnSelectOutputFolder_Click" Content="Browse" Grid.Row="2" Grid.Column="2" Margin="5,5,5,5" />
+        <Button x:Name="btnSelectOutputFolder" Command="{Binding BrowseForOutputDirectoryCommand}" Content="Browse" Grid.Row="2" Grid.Column="2" Margin="5,5,5,5" />
 
         <!-- output details -->
         <Label Grid.Row="3" Content="File Prefix" />
@@ -55,9 +55,9 @@
         <!-- config file, this should be remembered -->
         <Label Grid.Row="5" Content="GCloud Config File" />
         <TextBox Grid.Row="5" Grid.Column="1" Margin="5,5,5,5" Text="{Binding KeyPath}" />
-        <Button x:Name="btnGCloudConfig" Click="btnGCloudConfig_Click" Content="Browse" Grid.Row="5" Grid.Column="2" Margin="5,5,5,5" />
+        <Button x:Name="btnGCloudConfig" Command="{Binding BrowseForGCloudConfigCommand}" Content="Browse" Grid.Row="5" Grid.Column="2" Margin="5,5,5,5" />
 
         <!-- go -->
-        <Button x:Name="btnGo" Content="Save" FontWeight="Bold" Grid.Row="6" Grid.Column="2" Click="btnGo_Click" Margin="5,5,5,5" />
+        <Button x:Name="btnGo" Content="Save" FontWeight="Bold" Grid.Row="6" Grid.Column="2" Command="{Binding ConvertTextToSpeechCommand}" Margin="5,5,5,5" />
     </Grid>
 </UserControl>

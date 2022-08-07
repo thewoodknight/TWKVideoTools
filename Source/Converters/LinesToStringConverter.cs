@@ -12,6 +12,7 @@ namespace TWKVideoTools.Converters
             var lines = (List<string>)value;
             return string.Join(" ", lines);
         }
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TWKVideoTools": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

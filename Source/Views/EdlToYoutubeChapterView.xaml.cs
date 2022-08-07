@@ -1,6 +1,6 @@
-﻿using TWKVideoTools.ViewModels;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using TWKVideoTools.ViewModels;
 
 namespace TWKVideoTools.Views
 {
