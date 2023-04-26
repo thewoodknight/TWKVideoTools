@@ -1,5 +1,6 @@
 ﻿using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Win32;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
@@ -15,11 +16,21 @@ namespace TWKVideoTools.ViewModels
         public string SrtFilePath { get; set; }
         public string Text { get; set; }
         public ICommand GoCommand { get; set; }
+
+        Dictionary<string, string> replacements = new Dictionary<string, string>()
+        {
+            {"dado", "daydo"},
+            {" mm ", " millimeter " },
+            {"nopeino", "nope-in-o" },
+            {"formply", "form ply" },
+            {"mortise", "mortice" }
+        };
+
         public SrtToTxtViewModel()
         {
             SubtitleItems = new ObservableCollection<SubtitlesParser.Classes.SubtitleItem>();
-            GoCommand = new RelayCommand(() => { Go();  });
-            
+            GoCommand = new RelayCommand(() => { Go(); });
+
         }
 
         public async Task Go()
@@ -47,7 +58,16 @@ namespace TWKVideoTools.ViewModels
                 sb.AppendLine();
             }
 
-            Text = sb.ToString();
+            
+            Text = Replace(sb.ToString());
+        }
+
+        public string Replace(string input)
+        {
+            foreach (var r in replacements)
+                input = input.Replace(r.Key, r.Value, System.StringComparison.InvariantCultureIgnoreCase);
+
+            return input;
         }
     }
 }

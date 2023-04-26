@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using TWKVideoTools.ViewModels;
+using TWKVideoTools.Views;
 
 namespace TWKVideoTools
 {
@@ -19,6 +20,13 @@ namespace TWKVideoTools
             SrtToTxtViewModel = new SrtToTxtViewModel();
             DataContext = this;
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var settingsView = new SettingsView();
+            settingsView.DataContext = new SettingsViewModel();
+            settingsView.ShowDialog();
         }
     }
 }
