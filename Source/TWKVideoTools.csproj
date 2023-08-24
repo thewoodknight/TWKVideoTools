@@ -5,7 +5,12 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>twk_chiselsword_logo_reverse_800x800.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="twk_chiselsword_logo_reverse_800x800.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Common-wpf.Settings" Version="1.1.0" />

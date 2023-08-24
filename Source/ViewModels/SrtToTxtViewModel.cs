@@ -33,6 +33,7 @@ namespace TWKVideoTools.ViewModels
 
         }
 
+        bool ReplaceWords = false;
         public async Task Go()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "SubRip Subtitle|*.srt" };
@@ -51,6 +52,7 @@ namespace TWKVideoTools.ViewModels
                 }
             }
 
+            
             StringBuilder sb = new StringBuilder();
             foreach (var i in SubtitleItems)
             {
@@ -58,8 +60,10 @@ namespace TWKVideoTools.ViewModels
                 sb.AppendLine();
             }
 
-            
-            Text = Replace(sb.ToString());
+            if (ReplaceWords)
+                Text = Replace(sb.ToString());
+            else 
+                Text = sb.ToString();
         }
 
         public string Replace(string input)
