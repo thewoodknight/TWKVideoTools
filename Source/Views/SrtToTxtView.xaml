@@ -19,9 +19,9 @@
 
         <!-- select srt file -->
         <Label  Grid.Row="0" Content="SRT file" />
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="5,5,5,5" Text="{Binding SrtFilePath}" TextWrapping="Wrap" />
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" Text="{Binding SrtFilePath}" TextWrapping="Wrap" />
         <Button x:Name="btnSrtBrowse" Content="Browse" Grid.Row="0" Grid.Column="2" Margin="5,5,5,5" Command="{Binding GoCommand}" />
 
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,10,0,0" Text="{Binding Text}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,0" Text="{Binding Text}"/>
     </Grid>
 </UserControl>
